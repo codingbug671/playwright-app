@@ -2,8 +2,7 @@ const {test,expect} = require('@playwright/test');
 const StudentLoginPage = require('../pages/StudentLoginPage')
 const LicenseTypePage = require('../pages/LicenseTypePage');
 const ApplicantTypePage = require('../pages/ApplicantType');
-
-import LicenseTypeData from '../testData/licenseType.json';
+const LicenseTypeData = require('../testData/licenseType.json');
 
 test('Onboard a new student', async({page})=>
 {
@@ -20,7 +19,10 @@ test('Onboard a new student', async({page})=>
     await licenseTypePage.selectProduct(product);
     await licenseTypePage.selectProductCategory(category);
 
-    
+
+
+
+
 
 
 
