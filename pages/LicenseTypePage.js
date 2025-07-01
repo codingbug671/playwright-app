@@ -11,6 +11,7 @@ class LicenseTypePage
     }
 
     async selectProductCategory(productCategoryTestId) {
+    await this.page.waitForTimeout(500);
     await this.page.click(`div[data-testid='${productCategoryTestId}']`);
   }
 

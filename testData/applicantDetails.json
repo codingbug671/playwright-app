@@ -1,0 +1,16 @@
+{
+  "applicantDetails": {
+    "name": "testuser",
+    "mobileno": "971504097652",
+    "email": "abc@gmail.com",
+    "visaProfession": "ACCOUNTANT",
+    "visaType": "Holding Dubai visa",
+    "issueDate": "2020-05-05",
+    "expiryDate": "2026-05-05",
+    "birthDate": "1996-05-05",
+    "nationality": "Jordan",
+    "gender": "Male",
+    "location": "Al Qusais"
+
+  }
+}
