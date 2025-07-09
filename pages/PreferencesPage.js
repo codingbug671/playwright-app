@@ -37,7 +37,15 @@ class PreferencesPage
       await this.page.fill(this.preferredTestLanguage,"ENGLISH");
       await this.page.fill(this.preferredTrainingLanguage,"ENGLISH");
       await this.page.fill(this.preferredVoiceLanguage,"ENGLISH");
+      await this.page.click(this.nextBtn);
     }
+
+    async enterTransportationInformation()
+    {
+       await this.page.click(this.nextBtn);
+    }
+
+
   
   
   

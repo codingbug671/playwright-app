@@ -6,6 +6,7 @@ const LicenseTypeData = require('../testData/licenseType.json');
 const ApplicantTypeData = require("../testData/applicantDetails.json");
 const DrivingLicensePage = require("../pages/DrivingLicensePage");
 const LocationPage = require("../pages/LocationPage")
+const PreferencesPage = require("../pages/PreferencesPage")
 
 
 test('Onboard a new student', async({page})=>
@@ -17,11 +18,14 @@ test('Onboard a new student', async({page})=>
     const licensetypepage = new LicenseTypePage(page);
     const drivinglicensepage = new DrivingLicensePage(page);
     const locationpage = new LocationPage(page);
+    const preferencespage = new PreferencesPage(page);
     
     const product = LicenseTypeData.licenseType.product;
     const category = LicenseTypeData.licenseType.category;
     const applicanttypepage = new ApplicantTypePage(page);
     const applicant = ApplicantTypeData.applicantDetails;
+
+
    
   
   
@@ -34,6 +38,12 @@ test('Onboard a new student', async({page})=>
     await drivinglicensepage.enterExistingDrivingLicenseInfo("No");
     await drivinglicensepage.enterUAEExistingDrivingLicenseInfo("No");
     await locationpage.selectTrainingLocation(applicant);
+    await preferencespage.enterGeneralInformation();
+    await preferencespage.enterLanguagesInformation();
+    await preferencespage.enterTransportationInformation();
+
+    
+  
 
 
 
