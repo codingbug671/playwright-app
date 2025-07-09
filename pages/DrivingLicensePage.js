@@ -18,9 +18,9 @@ class DrivingLicensePage
       break;
 
       case 'No':
-      // perform actions if type is 'No'
+      //perform actions if type is 'No'
         await this.page.locator(this.button).nth(2).click({ force: true });
-        await this.page.waitForTimeout(300);
+        await this.page.waitForTimeout(1000);
         await this.page.click(this.nextBtn);
       break;
 
@@ -35,14 +35,14 @@ class DrivingLicensePage
       case 'Yes':
       // perform actions if type is 'Yes'
         await this.page.locator(this.button).nth(1).click({ force: true });
-        await this.page.waitForTimeout(300);
+       await this.page.waitForTimeout(1000);
         await this.page.click(this.nextBtn);
       break;
 
       case 'No':
       // perform actions if type is 'No'
         await this.page.locator(this.button).nth(2).click({ force: true });
-        await this.page.waitForTimeout(300);
+       await this.page.waitForTimeout(1000);
         await this.page.click(this.nextBtn);
       break;
 
