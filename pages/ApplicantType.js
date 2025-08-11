@@ -33,22 +33,25 @@ class ProductCategoryPage
         await this.page.fill(this.mobileno, applicant.mobileno);
         await this.page.fill(this.email, applicant.email);
         await this.page.locator(this.validateBtn).nth(1).click();
-        await this.inputOTPValue()
+      //  await this.inputOTPValue()
+        //await this.page.locator(this.validateBtn).nth(2).click();
+        //await this.inputOTPValue()
         await this.page.click(this.nextBtn);
 
     }
 
     async inputOTPValue()
     {
-        const otp = '123456';
-        const inputs = this.page.locator(this.otpinput);
+        // const otp = '123456';
+        // const inputs = this.page.locator(this.otpinput);
 
-        for (let i = 0; i < otp.length; i++) {
-            await inputs.nth(i).fill(otp[i]);
-        }
+        // for (let i = 0; i < otp.length; i++) {
+        //     await inputs.nth(i).fill(otp[i]);
+        // }
 
+        await this.page.waitForTimeout(30000);
         await this.page.click(this.otpvalidateBtn);
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         await this.page.click(this.okayBtn, { force: true });
 
     }
@@ -63,9 +66,14 @@ class ProductCategoryPage
 
         const filePath = path.resolve(__dirname, '../multimedia/Screenshot (1).png');
         await this.page.waitForLoadState('load');
-        await this.page.locator(this.emiratesId).waitFor({ state: 'visible' });
-        await this.page.type(this.emiratesId, emiratesId.toString());
-        await this.page.waitForTimeout(500);
+        const idField = this.page.locator(this.emiratesId);
+        await idField.waitFor({ state: 'visible' });
+        //await idField.waitFor({ state: 'editable' });
+        await idField.fill(emiratesId.toString());
+       // await this.page.waitForLoadState('load');
+       // await this.page.locator(this.emiratesId).waitFor({ state: 'visible' });
+       // await this.page.locator(this.emiratesId).type(emiratesId.toString(), { delay: 100 });
+        await this.page.waitForTimeout(1000);
         await this.page.fill(this.visaProfession,applicant.visaProfession);
         await this.page.press(this.visaProfession, 'Enter');
         await this.page.fill(this.visaType, applicant.visaType);

@@ -1,8 +1,10 @@
-class PreferencesPage
+const BasePage = require("./BasePage")
+
+class PreferencesPage extends BasePage
 {
     constructor(page)
     {
-        this.page = page
+        super(page);
         this.referenceInput = "input[id='[object Object]-referenceByCode']"
         this.scheduleTypeInput = "div[data-testid='input-select-preferredScheduleTypeCode']"
         this.scheduleTypeValue = "div[id='[object Object]-preferredScheduleTypeCode_list']"
@@ -21,12 +23,24 @@ class PreferencesPage
 
     async enterGeneralInformation()
     {
+      await this.waitAndDelay(this.referenceInput);
+      await this.page.focus(this.referenceInput);
       await this.page.fill(this.referenceInput,"ADVERTISEMENT");
       await this.page.press(this.referenceInput, 'Enter');
+      await this.waitAndDelay(this.scheduleTypeInput);
+      await this.page.focus(this.scheduleTypeInput);
       await this.page.click(this.scheduleTypeInput);
+      await this.waitAndDelay(this.scheduleTypeItem);
+      await this.page.focus(this.scheduleTypeItem);
       await this.page.click(this.scheduleTypeItem);
+      await this.waitAndDelay(this.buttonTrainingDays);
       await this.page.click(this.buttonTrainingDays);
+      await this.waitAndDelay(this.scheduleTypeInput);
+      await this.page.focus(this.scheduleTypeInput);
+      await this.waitAndDelay(this.scheduleTypeTime);
       await this.page.click(this.scheduleTypeTime);
+      await this.waitAndDelay(this.scheduleTypeTimeItem);
+      await this.page.focus(this.scheduleTypeTimeItem);
       await this.page.click(this.scheduleTypeTimeItem);
       await this.page.click(this.nextBtn);
     }

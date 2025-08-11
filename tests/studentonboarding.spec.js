@@ -1,4 +1,4 @@
-const {test,expect} = require('@playwright/test');
+const { test, expect, chromium } = require('@playwright/test');
 const StudentLoginPage = require('../pages/StudentLoginPage')
 const LicenseTypePage = require('../pages/LicenseTypePage');
 const ApplicantTypePage = require('../pages/ApplicantType');
@@ -9,8 +9,14 @@ const LocationPage = require("../pages/LocationPage")
 const PreferencesPage = require("../pages/PreferencesPage")
 
 
-test('Onboard a new student', async({page})=>
+test('Onboard a new student', async()=>
 {
+    const browser = await chromium.launch();
+    const context = await browser.newContext({
+    permissions: [], // No 'geolocation' permission granted
+  });
+
+    const page = await context.newPage();
 
     await page.goto('/');
 

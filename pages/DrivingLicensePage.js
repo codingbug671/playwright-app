@@ -22,6 +22,7 @@ class DrivingLicensePage
         await this.page.locator(this.button).nth(2).click({ force: true });
         await this.page.waitForTimeout(1000);
         await this.page.click(this.nextBtn);
+        await this.page.waitForTimeout(1000);
       break;
 
       default:
@@ -42,7 +43,7 @@ class DrivingLicensePage
       case 'No':
       // perform actions if type is 'No'
         await this.page.locator(this.button).nth(2).click({ force: true });
-       await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(1000);
         await this.page.click(this.nextBtn);
       break;
 
