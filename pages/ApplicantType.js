@@ -33,6 +33,7 @@ class ProductCategoryPage
         await this.page.fill(this.mobileno, applicant.mobileno);
         await this.page.fill(this.email, applicant.email);
         await this.page.locator(this.validateBtn).nth(1).click();
+        await this.page.waitForTimeout(1000);
       //  await this.inputOTPValue()
         //await this.page.locator(this.validateBtn).nth(2).click();
         //await this.inputOTPValue()

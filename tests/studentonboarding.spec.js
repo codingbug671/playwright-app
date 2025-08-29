@@ -7,6 +7,7 @@ const ApplicantTypeData = require("../testData/applicantDetails.json");
 const DrivingLicensePage = require("../pages/DrivingLicensePage");
 const LocationPage = require("../pages/LocationPage")
 const PreferencesPage = require("../pages/PreferencesPage")
+const PromotionsPage = require("../pages/PromotionsPage")
 
 
 test('Onboard a new student', async()=>
@@ -25,6 +26,7 @@ test('Onboard a new student', async()=>
     const drivinglicensepage = new DrivingLicensePage(page);
     const locationpage = new LocationPage(page);
     const preferencespage = new PreferencesPage(page);
+    const promotionspage = new PromotionsPage(page);
     
     const product = LicenseTypeData.licenseType.product;
     const category = LicenseTypeData.licenseType.category;
@@ -47,6 +49,9 @@ test('Onboard a new student', async()=>
     await preferencespage.enterGeneralInformation();
     await preferencespage.enterLanguagesInformation();
     await preferencespage.enterTransportationInformation();
+    await promotionspage.selectPackageInput();
+  
+    
 
     
   

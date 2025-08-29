@@ -11,6 +11,7 @@ class LocationPage
     async selectTrainingLocation(applicant) {
       await this.page.waitForTimeout(3000);
       await this.page.fill(this.locationinput,applicant.location);
+      await this.page.waitForTimeout(2000);
       await this.page.press(this.locationinput, 'Enter');
       await this.page.click(this.nextBtn);
     }
