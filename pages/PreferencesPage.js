@@ -64,7 +64,7 @@ class PreferencesPage extends BasePage
       await this.page.focus(this.preferredVoiceLanguage);
       await this.page.fill(this.preferredVoiceLanguage,"ENGLISH");
       await this.page.press(this.preferredVoiceLanguage, 'Enter');
-       await this.waitAndDelay(this.isRISTranslated);
+      await this.waitAndDelay(this.isRISTranslated);
       await this.page.focus(this.isRISTranslated);
       await this.page.fill(this.isRISTranslated,"No");
       await this.page.press(this.isRISTranslated, 'Enter');
@@ -75,6 +75,8 @@ class PreferencesPage extends BasePage
     {
       await this.waitAndDelay(this.nextBtn);
       await this.page.click(this.nextBtn);
+      await this.page.waitForTimeout(3000);
+      
     
         
     }

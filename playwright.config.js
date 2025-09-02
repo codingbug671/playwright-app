@@ -1,20 +1,25 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-require('dotenv').config();
+import dotenv from 'dotenv';
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+// Load .env file (default .env, or .env.qa, .env.uat depending on how you run)
+dotenv.config();
 
+// Load the right .env file
+const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env';
+dotenv.config({ path: path.resolve(__dirname, envFile) });
+
+// 👇 Debug logs to check values
+console.log('Loaded ENV file:', envFile);
+console.log('ENV:', process.env.ENV);
+console.log('BASIC_AUTH_USER:', process.env.BASIC_AUTH_USER);
+console.log('BASIC_AUTH_PASS:', process.env.BASIC_AUTH_PASS ? '***hidden***' : 'not set');
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  timeout: 60000,
+  timeout: 120000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -26,21 +31,26 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+
+  /* Shared settings for all the projects below. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    /* Base URL depends on ENV */
+    baseURL:
+      process.env.ENV === 'uat'
+        ? 'https://student-uat-icademy.edi-uae.com/'
+        : 'https://student-qa-icademy.edi-uae.com/',
 
-    baseURL: 'https://student-qa-icademy.edi-uae.com/',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* Collect trace when retrying the failed test */
     trace: 'on-first-retry',
 
-    httpCredentials: {
-      username: process.env.BASIC_AUTH_USER || '',
-      password: process.env.BASIC_AUTH_PASS || '',
-    },
-
+    /* Only set httpCredentials if present in env */
+    httpCredentials:
+      process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PASS
+        ? {
+            username: process.env.BASIC_AUTH_USER,
+            password: process.env.BASIC_AUTH_PASS,
+          }
+        : undefined,
   },
 
   /* Configure projects for major browsers */
@@ -49,43 +59,6 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    // You can enable more browsers here if needed
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
-
